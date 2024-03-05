@@ -119,15 +119,22 @@ function goCave() {
 }
 
 function buyHealth() {
-  if (gold >= 10) {
-    gold -= 10;
-    health += 10;
-    goldText.innerText = gold;
-    healthText.innerText = health;
-  } else {
-    text.innerText = "You do not have enough gold to buy health.";
+    if (health >= 100) {
+      // Display a message indicating the player already has full health
+      text.innerText = "Your health is already full. You cannot buy more health.";
+    } else if (gold >= 10) {
+      gold -= 10;
+      health += 10;
+      // Ensure health does not exceed 100
+      if (health > 100) {
+        health = 100;
+      }
+      goldText.innerText = gold;
+      healthText.innerText = health;
+    } else {
+      text.innerText = "You do not have enough gold to buy health.";
+    }
   }
-}
 
 function buyWeapon() {
   if (currentWeapon < weapons.length - 1) {
